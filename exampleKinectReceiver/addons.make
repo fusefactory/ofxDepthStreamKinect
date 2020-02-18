@@ -1,0 +1,4 @@
+ofxDepthStreamKinect
+ofxGui
+ofxNetwork
+ofxOpenCv

@@ -1,0 +1,4 @@
+ofxAzureKinect
+ofxDepthStreamKinect
+ofxGui
+ofxNetwork

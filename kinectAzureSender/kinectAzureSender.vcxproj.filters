@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxAzureKinect\src\ofxAzureKinect\Device.cpp">
+			<Filter>addons\ofxAzureKinect\src\ofxAzureKinect</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectBasePanel.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectBlobPanel.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectDevice.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectHandTracker.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectObjectTracker.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectPositionObjectTracker.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectReceiver.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectRemote.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectTransmitter\KinectTransmitter.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectTransmitter</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectTransmitter\KinectTransmitterDepthMap.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectTransmitter</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxDepthStreamKinect\libs\Zlib\ZlibUtils.cpp">
+			<Filter>addons\ofxDepthStreamKinect\libs\Zlib</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.cpp">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxAzureKinect">
+			<UniqueIdentifier>{D1CD0095-639A-AA0C-2695-A77A}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxAzureKinect\src">
+			<UniqueIdentifier>{1D958AB7-749A-B5D4-4289-C982}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxAzureKinect\src\ofxAzureKinect">
+			<UniqueIdentifier>{5A177E02-2822-7F8A-3873-684D}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxAzureKinect\libs">
+			<UniqueIdentifier>{94F0548D-4449-5E5B-562B-E676}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxAzureKinect\libs\turbojpeg">
+			<UniqueIdentifier>{3ECE9E8D-EE7A-167B-D044-A335}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxAzureKinect\libs\turbojpeg\include">
+			<UniqueIdentifier>{72187D30-5AC2-D6C7-38B3-F51C}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxDepthStreamKinect">
+			<UniqueIdentifier>{8B49496D-46DE-395D-FB53-3224}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxDepthStreamKinect\src">
+			<UniqueIdentifier>{BF7F48E1-6761-4BE7-DFE7-0B1B}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxDepthStreamKinect\libs">
+			<UniqueIdentifier>{A2BADE29-D962-E7FC-283A-AA36}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxDepthStreamKinect\libs\KinectReceiver">
+			<UniqueIdentifier>{21F18309-5AA1-3BA2-7003-0A60}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxDepthStreamKinect\libs\KinectTransmitter">
+			<UniqueIdentifier>{0F091C7F-BA0C-1FA1-C254-2923}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxDepthStreamKinect\libs\Zlib">
+			<UniqueIdentifier>{C64BF833-6EE7-9F0C-4209-A889}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxGui">
+			<UniqueIdentifier>{4F2A59AF-5F4E-704B-D067-EC13}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxGui\src">
+			<UniqueIdentifier>{645E9533-4DCD-6179-1CDF-CB65}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxNetwork">
+			<UniqueIdentifier>{01A15744-29A6-108D-08E9-83A7}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxNetwork\src">
+			<UniqueIdentifier>{3D1C10C7-8F35-E796-9C70-F5F3}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxAzureKinect\src\ofxAzureKinect\Device.h">
+			<Filter>addons\ofxAzureKinect\src\ofxAzureKinect</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxAzureKinect\src\ofxAzureKinect\Types.h">
+			<Filter>addons\ofxAzureKinect\src\ofxAzureKinect</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxAzureKinect\src\ofxAzureKinect.h">
+			<Filter>addons\ofxAzureKinect\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxAzureKinect\libs\turbojpeg\include\turbojpeg.h">
+			<Filter>addons\ofxAzureKinect\libs\turbojpeg\include</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\src\ofxDepthKinectTransmitter.h">
+			<Filter>addons\ofxDepthStreamKinect\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\src\ofxDepthStreamKinect.h">
+			<Filter>addons\ofxDepthStreamKinect\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectBasePanel.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectBlobPanel.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectConfig.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectDepthEnum.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectDevice.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectHandTracker.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectObjectTracker.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectPositionObjectTracker.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectReceiver.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectReceiverListener.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectRemote.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectSettings.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\TrackedHand.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectTransmitter\KinectTransmitter.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectTransmitter</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectTransmitter\KinectTransmitterDepthMap.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectTransmitter</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectTransmitter\zconf.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\KinectTransmitter</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\Zlib\zlib.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\Zlib</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\Zlib\ZlibUtils.h">
+			<Filter>addons\ofxDepthStreamKinect\libs\Zlib</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetwork.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxNetworkUtils.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxTCPSettings.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxNetwork\src\ofxUDPSettings.h">
+			<Filter>addons\ofxNetwork\src</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="icon.rc" />
+	</ItemGroup>
+</Project>
