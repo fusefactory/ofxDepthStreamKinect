@@ -10,7 +10,7 @@ void ofApp::setup(){
 	//setup gui
 	gui.setup("kinect", "config.xml"); // most of the time you don't need a name
 	gui.setSize(300, gui.getHeight());
-	gui.add(tcpPortSlider.setup("TCP PORT", 4444, 0, 65535));
+	gui.add(tcpPortSlider.setup("TCP PORT", 4445, 0, 65535));
 	gui.add(singleClient.setup("SINGLE CLIENT", true));
 	gui.add(depthModeParamString.set("DEPTH MODE (mouse over)", "K4A_DEPTH_MODE_NFOV_UNBINNED"));
 	gui.add(leftMarginFloatSlider.setup("LEFT MARGIN", 0, 0, 0.5));
@@ -40,7 +40,6 @@ void ofApp::setup(){
 	else if (depthModeString.compare("K4A_DEPTH_MODE_PASSIVE_IR") == 0) {
 		depthMode = K4A_DEPTH_MODE_PASSIVE_IR;
 	}
-
 	ofAddListener(kinectDevice.onNewDepthData, this, &ofApp::onNewDepthData);
 
 	//setup kinect
@@ -74,28 +73,37 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	//apply crop
+	/*
+	- apply crop
+	- modify image to draw
+	- mirror raw image
+	*/
 	if (this->kinectDevice.isStreaming() && newDepthData) {
 
 		newDepthData = false;
 
-		depthPixels = kinectDevice.getDepthPix();
-		depthToDrawPixels = depthPixels;
+		rawDepthPixels = kinectDevice.getDepthPix();
+		depthPixels = rawDepthPixels;
+		depthToDrawPixels = rawDepthPixels;
 
-		const float w = depthPixels.getWidth();
-		const float h = depthPixels.getHeight();
+		const float w = rawDepthPixels.getWidth();
+		const float h = rawDepthPixels.getHeight();
 
-		for (int y = 0; y < depthPixels.getHeight(); y++) {
-			for (int x = 0; x < depthPixels.getWidth(); x++) {
-				int index = depthPixels.getPixelIndex(x, y);
-				 
-				if (x > leftMarginFloatSlider* w && x < w - rightMarginFloatSlider * w &&
-					y > topMarginFloatSlider* h && y < h - bottomMarginFloatSlider * h) {
-					depthToDrawPixels[index] = depthToDrawPixels[index] * 9.0f;
+		for (int y = 0; y < rawDepthPixels.getHeight(); y++) {
+			for (int x = 0; x < rawDepthPixels.getWidth(); x++) {
+				int index = rawDepthPixels.getPixelIndex(x, y);
+					
+				int mirrorX = rawDepthPixels.getWidth() - 1 - x;
+				int indexMirrored = rawDepthPixels.getPixelIndex(mirrorX, y);
+
+				if (mirrorX > leftMarginFloatSlider * w && mirrorX < w - rightMarginFloatSlider * w &&
+					y > topMarginFloatSlider * h && y < h - bottomMarginFloatSlider * h) {
+					depthToDrawPixels[indexMirrored] = rawDepthPixels[index] * 9.0f;
+					depthPixels[indexMirrored] = rawDepthPixels[index];
 				}
 				else {
-					depthPixels[index] = 0;
-					depthToDrawPixels[index] = 0;
+					depthPixels[indexMirrored] = 0;
+					depthToDrawPixels[indexMirrored] = 0;
 				}
 			}
 		}
