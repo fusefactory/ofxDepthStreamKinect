@@ -26,8 +26,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
     private:
-        KinectDevice *kinect;
-        KinectBasePanel kinectGui;
+        KinectDevice *kinect, *kinectAzure;
+        KinectBasePanel kinectGui, kinectGuiAzure;
     
         bool bShowGui;
 };

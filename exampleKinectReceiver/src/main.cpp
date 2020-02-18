@@ -7,7 +7,7 @@ int main( ){
     settings.glVersionMajor = 3;
     settings.glVersionMinor = 3;
     settings.windowMode = OF_WINDOW;
-    settings.setSize(768, 768);
+    settings.setSize(1152, 768);
 
     shared_ptr<ofAppBaseWindow> mainWindow = ofCreateWindow(settings);
     mainWindow->setWindowTitle("exampleKinectReceiver");

@@ -5,7 +5,7 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     
     KinectConfig kinectConfig;
-    kinectConfig.serverAddress = "127.0.0.1";
+    kinectConfig.serverAddress = "192.168.1.74";
     kinectConfig.port = 4444;
     kinectConfig.minDistance = 500;
     kinectConfig.maxDistance = 5000;
@@ -16,7 +16,7 @@ void ofApp::setup(){
     kinectConfig.vertCorrection = 1;
     kinectConfig.keystone = 0;
 
-    kinect = new KinectRemote("kinect", kinectConfig.serverAddress, kinectConfig.port, 2, KinectAzureDepthNFOVUnbinned);
+    kinect = new KinectRemote("kinect", kinectConfig.serverAddress, kinectConfig.port, 2, KinectV2Depth);
     kinect->setMinDistance(kinectConfig.minDistance);
     kinect->setMaxDistance(kinectConfig.maxDistance);
     kinect->setLeftMargin(kinectConfig.leftMargin);
@@ -29,11 +29,32 @@ void ofApp::setup(){
     kinect->setAspect(0, 0);
 
     kinect->start();
+
                             
     kinectGui.setup("KINECT", "kinect.xml", 10, 50);
     kinectGui.addGuiComponents(kinect);
     
     kinectGui.loadFromFile(kinectGui.getFilename());
+    
+    kinectConfig.port = 4445;
+    kinectAzure = new KinectRemote("kinect", kinectConfig.serverAddress, kinectConfig.port, 2, KinectAzureDepthNFOVUnbinned);
+    kinectAzure->setMinDistance(kinectConfig.minDistance);
+    kinectAzure->setMaxDistance(kinectConfig.maxDistance);
+    kinectAzure->setLeftMargin(kinectConfig.leftMargin);
+    kinectAzure->setRightMargin(kinectConfig.rightMargin);
+    kinectAzure->setTopMargin(kinectConfig.topMargin);
+    kinectAzure->setBottomMargin(kinectConfig.bottomMargin);
+    kinectAzure->setKeystone(kinectConfig.keystone);
+    kinectAzure->setVertCorrection(kinectConfig.vertCorrection);
+    
+    kinectAzure->setAspect(512, 0);
+    
+    kinectAzure->start();
+    
+    kinectGuiAzure.setup("KINECT AZURE", "kinect.xml", 600, 50);
+    kinectGuiAzure.addGuiComponents(kinectAzure);
+    
+    kinectGuiAzure.loadFromFile(kinectGui.getFilename());
     
     bShowGui = true;
 }
@@ -41,6 +62,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     kinect->update();
+    kinectAzure->update();
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
@@ -49,9 +71,12 @@ void ofApp::update(){
 void ofApp::draw(){
     ofSetColor(255);
     kinect->draw();
+    kinectAzure->draw();
     
-    if (bShowGui)
+    if (bShowGui){
         kinectGui.draw();
+        kinectGuiAzure.draw();
+    }
 }
 
 //--------------------------------------------------------------
