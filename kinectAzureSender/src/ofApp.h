@@ -34,6 +34,7 @@ private:
 	KinectTransmitterDepthMap kinectTransmitter;
 
 	ofShortPixels depthPixels;		//depth image from kinect device
+	ofShortPixels rawDepthPixels;		//image returned from addons
 	ofShortPixels depthToDrawPixels;
 	ofTexture depthTexture;			//texture to draw depth image
 		
