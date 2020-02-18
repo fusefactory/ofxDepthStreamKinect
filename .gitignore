@@ -29,7 +29,6 @@ addons/*
 apps/*
  
 # rule to ignore compiled / downloaded libs
-/libs/*
 !/libs/openFrameworks
 !/libs/openFrameworksCompiled
  
