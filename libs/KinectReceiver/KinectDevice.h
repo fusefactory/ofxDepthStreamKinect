@@ -69,7 +69,7 @@ public:
     
 protected:
     virtual void setupDevice();
-    virtual float* updateEdgeData() { return NULL; };
+    virtual unsigned short* updateEdgeData() { return NULL; };
     virtual void clearEdgeData() = 0;
     virtual ofVec3f& updateCom() { return com; };
     

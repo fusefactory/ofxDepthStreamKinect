@@ -5,8 +5,8 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     
     KinectConfig kinectConfig;
-    kinectConfig.serverAddress = "127.0.0.1";
-    kinectConfig.port = 4444;
+    kinectConfig.serverAddress = "192.168.1.74";
+    kinectConfig.port = 4445;
     kinectConfig.minDistance = 500;
     kinectConfig.maxDistance = 5000;
     kinectConfig.leftMargin = 0;

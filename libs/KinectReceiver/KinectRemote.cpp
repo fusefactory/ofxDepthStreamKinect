@@ -11,7 +11,8 @@
 #include <math.h>
 
 KinectRemote::KinectRemote(std::string name, std::string address, int port, unsigned int bytesPerPixel,  KinectDepthEnum kinectDepthEnum) : KinectDevice(name, bytesPerPixel, kinectDepthEnum) {
-    edgeData = new float[int(resolution.x * resolution.y * 3)]; // rgb
+    const unsigned int lenght = resolution.x * resolution.y;
+    edgeData = new unsigned short[lenght];
     
     receiver = new KinectReceiver(address, port);
     receiver->addListener(this);
@@ -56,9 +57,7 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
             const int posY = y;
             
             //clear pixels
-            edgeData[index * 3 + 0] = 0.0;
-            edgeData[index * 3 + 1] = 0.0;
-            edgeData[index * 3 + 2] = 0.0;
+            edgeData[index] = 0.0;
             
             // keystone
             if (posX >= realLeftMargin && posX <= resolution.x - realRightMargin && posY >= realTopMargin && posY <= resolution.y - realBottomMargin) {
@@ -85,9 +84,11 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
                     
                     if (depth >= minDistance && depth <= correctMaxDistance) {
                         float intensity = (depth - minDistance) / (float)(correctMaxDistance - minDistance);
-                        edgeData[index * 3 + 0] = 1 - intensity;
-                        edgeData[index * 3 + 1] = 1 - intensity;
-                        edgeData[index * 3 + 2] = 1 - intensity;
+                        
+                        unsigned short us = (unsigned short ) (1.0f - intensity);
+                        edgeData[index] = us;
+//                        edgeData[index * 3 + 1] = 1 - intensity;
+//                        edgeData[index * 3 + 2] = 1 - intensity;
                         valid = true;
                         
                         comX += posX;
@@ -97,9 +98,10 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
                     }
                 }
                 if (!valid) {
-                    edgeData[index * 3 + 0] = 0.0;
-                    edgeData[index * 3 + 1] = 0.0;
-                    edgeData[index * 3 + 2] = 0.0;
+                    edgeData[index] = 0.0;
+//                    edgeData[index * 3 + 0] = 0.0;
+//                    edgeData[index * 3 + 1] = 0.0;
+//                    edgeData[index * 3 + 2] = 0.0;
                 }
             }
         }
@@ -113,7 +115,7 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
     }
 }
 
-float *KinectRemote::updateEdgeData() {
+unsigned short *KinectRemote::updateEdgeData() {
     return edgeData;
 }
 

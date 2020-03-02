@@ -24,7 +24,7 @@ KinectDevice::KinectDevice(std::string name, unsigned int bytesPerPixel, KinectD
     
     const int numOfPixels = resolution.x * resolution.y;
     lastData = new float[numOfPixels];
-    texture.allocate(resolution.x, resolution.y, GL_RGB);
+    texture.allocate(resolution.x, resolution.y, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, GL_UNSIGNED_SHORT);
     texture.setTextureMinMagFilter(GL_NEAREST, GL_NEAREST); // for collison map
     kinectRecordingFbo.allocate(resolution.x, resolution.y, GL_RGB);
     
@@ -190,8 +190,8 @@ void KinectDevice::update() {
     }
     
     if(!readKinectRecording){
-        float *data = updateEdgeData();
-        texture.loadData(data, resolution.x, resolution.y, GL_RGB);
+        unsigned short *data = updateEdgeData();
+        texture.loadData(data, resolution.x, resolution.y, GL_UNSIGNED_SHORT);
         com = updateCom();
     }else{
         kinectRecording.update();

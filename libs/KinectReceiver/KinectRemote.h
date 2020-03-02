@@ -28,14 +28,14 @@ public:
     bool isRunning() override;
 
 protected:
-    float *updateEdgeData() override;
+    unsigned short *updateEdgeData() override;
     ofVec3f &updateCom() override;
     int xKeystone(const float pX, const float pY, float keystone);
     void clearEdgeData() override;
 
 private:
 	KinectReceiver* receiver;
-    float *edgeData;
+    unsigned short *edgeData;
     ofVec3f com;
 
 };
