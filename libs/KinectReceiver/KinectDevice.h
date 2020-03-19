@@ -28,6 +28,9 @@ public:
     void setAspect(float x, float y);
     void setAspect(float x, float y, float width, float height);
     
+    ofVec2f getAspectPosition(){ return aspectPosition; }       //position where draw kinect
+    ofVec2f getAspectSize(){ return aspectSize;}     //size for drawing kinect
+    
     void connectRelease();
     void setMinDistance(int &distance);
     int getMinDistance();
@@ -88,7 +91,8 @@ protected:
     float *lastData;
     ofVec3f com;
     int movement = 0;
-    float x, y, width, height;
+    ofVec2f aspectPosition;
+    ofVec2f aspectSize;
     float XtoZ, YtoZ;
 };
 

@@ -262,29 +262,27 @@ void KinectDevice::setAspect(float x, float y){
 }
 
 void KinectDevice::setAspect(float x, float y, float width, float height) {
-    KinectDevice::x = x;
-    KinectDevice::y = y;
-    KinectDevice::width = width;
-    KinectDevice::height = height;
+    KinectDevice::aspectPosition.set(x, y);
+    KinectDevice::aspectSize.set(width, height);
 }
 
 void KinectDevice::draw() {
     ofSetColor(255);
-    texture.draw(x, y, width, height);
-    ofDrawBitmapStringHighlight(fullName, x + 20, y + 20);
+    texture.draw(aspectPosition.x, aspectPosition.y, aspectSize.x, aspectSize.y);
+    ofDrawBitmapStringHighlight(fullName, aspectPosition.x + 20, aspectPosition.y + 20);
     if (isRunning()) {
         ofSetColor(0, 255, 0, 255);
     } else {
         ofSetColor(255, 0, 0, 255);
     }
-    ofDrawRectangle(x + 10, y + 6, 4, 20);
+    ofDrawRectangle(aspectPosition.x + 10, aspectPosition.y + 6, 4, 20);
     ofSetColor(0, 0, 255);
-    ofDrawLine(x + width / 2.0, y, x + width / 2.0, y + height);
+    ofDrawLine(aspectPosition.x + aspectSize.x / 2.0, aspectPosition.y, aspectPosition.x + aspectSize.x / 2.0, aspectPosition.y + aspectSize.y);
 }
 
 void KinectDevice::drawSelected() {
     ofSetColor(20, 97, 189);
-    ofDrawRectangle(x + 4, y + 6, 4, 20);
+    ofDrawRectangle(aspectPosition.x + 4, aspectPosition.y + 6, 4, 20);
 }
 
 float KinectDevice::convertToRealWorldX(float x, float depth) {
@@ -294,7 +292,3 @@ float KinectDevice::convertToRealWorldX(float x, float depth) {
 float KinectDevice::convertToRealWorldY(float y, float depth) {
     return (0.5f - y / resolution.y) * depth * YtoZ;
 }
-
-
-
-
