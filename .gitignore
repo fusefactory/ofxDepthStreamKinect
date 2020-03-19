@@ -57,8 +57,7 @@ Android.mk
 
 # OSX
 .DS_Store
-bin/*.app
 */bin/*.app
 
 #Windows
-bin/*.exe
+*/bin/*.exe
