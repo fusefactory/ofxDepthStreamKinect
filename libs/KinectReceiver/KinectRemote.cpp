@@ -44,7 +44,6 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
     const int realTopMargin = resolution.y * topMargin;
     const int realBottomMargin = resolution.y * bottomMargin;
     
-    const int correctMaxDistance = maxDistance * (1.0 - vertCorrection * (cos(M_PI / 3.0 * (resolution.y - y) / resolution.y) - 0.5));
     
     int count = 0;
     for (int y = 0.0; y < resolution.y; y++) {
@@ -81,7 +80,10 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
                 }
 
                 bool valid = false;
+                
                 if (posX >= realLeftMargin && posX <= resolution.x - realRightMargin && posY >= realTopMargin && posY <= resolution.y - realBottomMargin) {
+                    
+                    const int correctMaxDistance = maxDistance * (1.0 - vertCorrection * (cos(M_PI / 3.0 * (resolution.y - y) / resolution.y) - 0.5));
                     
                     if (depth >= minDistance && depth <= correctMaxDistance) {
                         float intensity = (depth - minDistance) / (float)(correctMaxDistance - minDistance);
