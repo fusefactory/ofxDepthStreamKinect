@@ -111,7 +111,7 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
     
     //TODO: it is possible add a listenerto add inside KinectBasePanel?
     ofRectangle kinectGuiRect = ofRectangle(kinectGui.getPosition().x,
-                                            kinectGui.getPosition().y + kinectGui.getHeight(),
+                                            kinectGui.getPosition().y,
                                             kinectGui.getWidth(),
                                             kinectGui.getHeight());
     
