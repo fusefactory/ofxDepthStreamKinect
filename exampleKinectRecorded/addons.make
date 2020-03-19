@@ -1,0 +1,3 @@
+ofxDepthStreamKinect
+ofxGui
+ofxNetwork
