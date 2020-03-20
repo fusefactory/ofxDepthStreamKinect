@@ -208,7 +208,9 @@ void KinectDevice::update() {
         depthShader.setUniformMatrix4f("modelview", modelviewFlat);
         depthShader.setUniformMatrix4f("projection", projectionFlat);
 
-        depthShader.setUniformTexture("tex0", kinectRecording.getTexture(), 0);
+        if(kinectRecording.getTexture().isAllocated())
+            depthShader.setUniformTexture("tex0", kinectRecording.getTexture(), 0);
+        
         depthShader.setUniform1f("onlyDepth", 1);
         depthShader.setUniform1f("maxDistance", 5000);
 
@@ -268,7 +270,9 @@ void KinectDevice::setAspect(float x, float y, float width, float height) {
 
 void KinectDevice::draw() {
     ofSetColor(255);
-    texture.draw(aspectPosition.x, aspectPosition.y, aspectSize.x, aspectSize.y);
+    if(texture.isAllocated())
+        texture.draw(aspectPosition.x, aspectPosition.y, aspectSize.x, aspectSize.y);
+    
     ofDrawBitmapStringHighlight(fullName, aspectPosition.x + 20, aspectPosition.y + 20);
     if (isRunning()) {
         ofSetColor(0, 255, 0, 255);
