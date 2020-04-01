@@ -1,7 +1,7 @@
 #include "KinectTransmitterDepthMap.h"
 
 KinectTransmitterDepthMap::~KinectTransmitterDepthMap() {
-	if(byteBuffer.data = NULL)	delete[] byteBuffer.data;
+	if(byteBuffer.data != NULL)	delete[] byteBuffer.data;
 }
 
 void KinectTransmitterDepthMap::setup(int port, int numBytePerPixel) {
