@@ -7,7 +7,6 @@
 //
 
 #include "KinectDevice.h"
-#include "ofApp.h"
 #include <algorithm>
 
 KinectDevice::KinectDevice(std::string name, unsigned int bytesPerPixel, KinectDepthEnum kinectDepthEnum) {
