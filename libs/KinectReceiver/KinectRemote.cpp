@@ -33,7 +33,7 @@ bool KinectRemote::isRunning() {
     return receiver->isRunning();
 }
 
-void KinectRemote::newDepthData(char *data, unsigned int size) {
+void KinectRemote::newDepthData(char *data) {
     float comX = 0;
     float comY = 0;
     float comZ = 0;
@@ -43,7 +43,6 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
     const int realRightMargin = resolution.x * rightMargin;
     const int realTopMargin = resolution.y * topMargin;
     const int realBottomMargin = resolution.y * bottomMargin;
-    
     
     int count = 0;
     for (int y = 0.0; y < resolution.y; y++) {
@@ -77,6 +76,10 @@ void KinectRemote::newDepthData(char *data, unsigned int size) {
                     int byte2 = data[depthIndex + 0];
                     int byte3 = data[depthIndex + 1];
                     depth = byte0 << 24 | (byte1 & 0xFF) << 16 | (byte2 & 0xFF) << 8 | (byte3 & 0xFF);
+                    
+                    if(depth > 0){
+                        
+                    }
                 }
 
                 bool valid = false;

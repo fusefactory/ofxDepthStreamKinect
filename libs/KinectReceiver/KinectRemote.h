@@ -21,8 +21,7 @@ public:
     KinectRemote(std::string name, std::string address, int port, unsigned int bytesPerPixel = 2,  KinectDepthEnum kinectDepthEnum = KinectV2Depth);
     ~KinectRemote();
     
-    void newDepthData(char *data, unsigned int size) override;
-
+    void newDepthData(char *data) override;
     void start() override;
     void stop() override;
     bool isRunning() override;
