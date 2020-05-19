@@ -3,11 +3,11 @@
 
 //========================================================================
 int main( ){
-	ofGLFWWindowSettings settings;
+    ofGLFWWindowSettings settings;
     settings.glVersionMajor = 3;
     settings.glVersionMinor = 3;
     settings.windowMode = OF_WINDOW;
-    settings.setSize(768, 768);
+    settings.setSize(1024, 1024);
 
     shared_ptr<ofAppBaseWindow> mainWindow = ofCreateWindow(settings);
     mainWindow->setWindowTitle("exampleKinectRecorded");
@@ -16,5 +16,4 @@ int main( ){
     
     ofRunApp(mainWindow, mainApp);          //execute setup
     ofRunMainLoop();
-
 }

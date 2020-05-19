@@ -13,7 +13,7 @@ class KinectReceiverListener {
     
 public:
     //new data for depth image avaiable with size and number byte per pixel
-    virtual void newDepthData(char *data, unsigned int size) = 0;
+    virtual void newDepthData(char *data) = 0;
 };
 
 #endif /* KinectStreamListener_h */

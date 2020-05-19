@@ -88,7 +88,7 @@ void KinectReceiver::threadedFunction() {
                 unsigned int uncompressedRealSize = ZlibUtils::decompress(uncompressedDump, uncompressedSize, compressedDump, length);
                 
                 for (KinectReceiverListener *listener : listeners) {
-                    listener->newDepthData(uncompressedDump, uncompressedRealSize);
+                    listener->newDepthData(uncompressedDump);
                 }
             }
             
