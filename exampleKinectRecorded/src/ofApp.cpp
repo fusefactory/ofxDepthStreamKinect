@@ -2,9 +2,11 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofSetFrameRate(60);
+    
     KinectConfig kinectConfig;
-    kinectConfig.serverAddress = kinectIp;
-    kinectConfig.port = kinectPort;
+    kinectConfig.serverAddress = "127.0.0.1";
+    kinectConfig.port = 4444;
     kinectConfig.minDistance = 500;
     kinectConfig.maxDistance = 5000;
     kinectConfig.leftMargin = 0;
@@ -13,36 +15,34 @@ void ofApp::setup(){
     kinectConfig.bottomMargin = 0;
     kinectConfig.vertCorrection = 1;
     kinectConfig.keystone = 0;
+
+    kinect = new KinectRemote("kinect", kinectConfig.serverAddress, kinectConfig.port, 1, KinectAzureDepthWFOVUnbinned);
+    kinect->setMinDistance(kinectConfig.minDistance);
+    kinect->setMaxDistance(kinectConfig.maxDistance);
+    kinect->setLeftMargin(kinectConfig.leftMargin);
+    kinect->setRightMargin(kinectConfig.rightMargin);
+    kinect->setTopMargin(kinectConfig.topMargin);
+    kinect->setBottomMargin(kinectConfig.bottomMargin);
+    kinect->setKeystone(kinectConfig.keystone);
+    kinect->setVertCorrection(kinectConfig.vertCorrection);
     
-    kinect.setMinDistance(kinectConfig.minDistance);
-    kinect.setMaxDistance(kinectConfig.maxDistance);
-    kinect.setLeftMargin(kinectConfig.leftMargin);
-    kinect.setRightMargin(kinectConfig.rightMargin);
-    kinect.setTopMargin(kinectConfig.topMargin);
-    kinect.setBottomMargin(kinectConfig.bottomMargin);
-    kinect.setKeystone(kinectConfig.keystone);
-    kinect.setVertCorrection(kinectConfig.vertCorrection);
-    
-    kinect.setAspect(0, 0);
-    
-    kinect.start();
-    
+    kinect->setAspect(0, 0);
+
+
+    kinect->loadKinectRecording("director-2.mov");   //change here kinect movie to load
+//    kinect->loadKinectRecording("TestKinect.m4v");   //change here kinect movie to load
+
     kinectGui.setup("KINECT", "kinect.xml", 10, 50);
-    kinectGui.addGuiComponents(&kinect);
+    kinectGui.addGuiComponents(kinect);
     
     kinectGui.loadFromFile(kinectGui.getFilename());
     
     bShowGui = true;
-    
-    //put in your data folder a recorded raw data of kinect
-    kinect.loadKinectRecording("kinect_smaller.mov");
-    
-    //reming to add dragEvent
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    kinect.update();
+    kinect->update();
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
@@ -50,7 +50,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     ofSetColor(255);
-    kinect.draw();
+    kinect->draw();
     
     if (bShowGui)
         kinectGui.draw();
@@ -58,7 +58,12 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if(key == 'g'){
+        bShowGui = ! bShowGui;
+    }
+    else if (key == 's'){
+        kinectGui.save();
+    }
 }
 
 //--------------------------------------------------------------
@@ -107,14 +112,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){
-    
-    //TODO: it is possible add a listenerto add inside KinectBasePanel?
-    ofRectangle kinectGuiRect = ofRectangle(kinectGui.getPosition().x,
-                                            kinectGui.getPosition().y,
-                                            kinectGui.getWidth(),
-                                            kinectGui.getHeight());
-    
-    if(kinectGuiRect.inside(dragInfo.position))
-        kinect.loadKinectRecording(dragInfo.files[0]);
+void ofApp::dragEvent(ofDragInfo dragInfo){ 
+
 }
