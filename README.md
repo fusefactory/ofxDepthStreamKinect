@@ -16,7 +16,7 @@ This addons is compatible with the following kinect:
 | Windows 10 | Yes    | Yes      |
 | Mac OS     | No     | Yes      |
 
-The sender binary (java) for KinectV2 is available on [here](https://drive.google.com/drive/folders/1aEp-1aSU9LYffDRH-BQqwebyv9A6AHaa?usp=sharing).
+The sender binary (java) for KinectV2 is available on [here](https://drive.google.com/file/d/1G8OlAO5aRGtnPxaKppEEuxYKKH0UME4D/view?usp=sharing).
 
 # Protocol
 
