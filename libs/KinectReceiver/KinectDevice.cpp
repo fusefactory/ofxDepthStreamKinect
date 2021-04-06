@@ -64,28 +64,28 @@ void KinectDevice::setupDevice(){
             
             break;
         case KinectAzureDepthNFOVUnbinned:
-            fullName = name + " KINECT-AZURE-Near-Unbinned";
+            fullName = name + " AZURE-Near-Unbinned";
 
             resolution.set(640, 576);
             fieldOfViewDegree.set(75, 65);
             break;
             
         case KinectAzureDepthNFOVBinned:
-            fullName = name + " KINECT-AZURE-Near-Binned";
+            fullName = name + " AZURE-Near-Binned";
             
             resolution.set(320, 288);
             fieldOfViewDegree.set(75, 65);
             break;
             
         case KinectAzureDepthWFOVUnbinned:
-            fullName = name + " KINECT-AZURE-Wide-Unbinned";
+            fullName = name + " AZURE-Wide-Unbinned";
 
             resolution.set(1024, 1024);
             fieldOfViewDegree.set(120, 120);
             break;
             
         case KinectAzureDepthWFOVBinned:
-            fullName = name + " KINECT-AZURE-Wide-Binned";
+            fullName = name + " AZURE-Wide-Binned";
             
             resolution.set(512, 512);
             fieldOfViewDegree.set(120, 120);
