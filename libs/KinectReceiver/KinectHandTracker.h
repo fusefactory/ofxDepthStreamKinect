@@ -6,7 +6,6 @@
 //
 //
 
-#ifdef ofxDepthStreamKinectReceiver
 
 #ifndef KinectHandTracker_h
 #define KinectHandTracker_h
@@ -28,4 +27,3 @@ private:
 };
 #endif /* KinectHandTracker_h */
 
-#endif

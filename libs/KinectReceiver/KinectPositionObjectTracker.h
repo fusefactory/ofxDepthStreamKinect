@@ -5,7 +5,6 @@
 //  Created by Matteo Mestucci on 17/02/2020.
 //
 
-#ifdef ofxDepthStreamKinectReceiver
 
 #ifndef KinectPositionTracker_h
 #define KinectPositionTracker_h
@@ -28,4 +27,3 @@ private:
 
 #endif /* KinectPositionTracker_h */
 
-#endif

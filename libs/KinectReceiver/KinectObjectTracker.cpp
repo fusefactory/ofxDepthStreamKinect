@@ -6,7 +6,6 @@
 //
 //
 
-#ifdef ofxDepthStreamKinectReceiver
 
 #include "KinectObjectTracker.h"
 
@@ -83,4 +82,3 @@ void KinectObjectTracker::drawBlobs(float x, float y, float width, float height)
     glDisable(GL_BLEND);
 }
 
-#endif

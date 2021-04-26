@@ -5,7 +5,6 @@
 //  Created by Matteo Mestucci on 17/02/2020.
 //
 
-#ifdef ofxDepthStreamKinectReceiver
 
 #include "KinectPositionObjectTracker.h"
 
@@ -47,4 +46,3 @@ void KinectPositionObjectTracker::calculatePositionTracked() {
     }
 }
 
-#endif

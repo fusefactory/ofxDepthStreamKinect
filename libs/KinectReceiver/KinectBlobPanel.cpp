@@ -5,7 +5,6 @@
 //  Created by Matteo Mestucci on 17/02/2020.
 //
 
-#ifdef ofxDepthStreamKinectReceiver
 
 #include "KinectBlobPanel.h"
 
@@ -24,4 +23,3 @@ void KinectBlobPanel::addGuiComponents(KinectDevice *kinectDevice, KinectObjectT
     maxAreaIntSlider.addListener(kinectObjectTracker, &::KinectHandTracker::setMaxArea);
 }
 
-#endif

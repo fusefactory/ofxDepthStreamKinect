@@ -6,8 +6,6 @@
 //
 //
 
-#ifdef ofxDepthStreamKinectReceiver
-
 #ifndef KinectObjectTracker_h
 #define KinectObjectTracker_h
 
@@ -54,4 +52,3 @@ private:
 
 #endif /* KinectObjectTracker_h */
 
-#endif

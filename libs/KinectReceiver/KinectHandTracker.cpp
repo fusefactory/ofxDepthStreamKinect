@@ -6,8 +6,6 @@
 //
 //
 
-#ifdef ofxDepthStreamKinectReceiver
-
 
 #include "KinectHandTracker.h"
 
@@ -60,4 +58,3 @@ std::vector<TrackedHand> KinectHandTracker::getTrackedHands() {
     return hands;
 }
 
-#endif
