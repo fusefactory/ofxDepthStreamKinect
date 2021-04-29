@@ -267,12 +267,12 @@ void KinectDevice::setAspect(float x, float y, float width, float height) {
     KinectDevice::aspectSize.set(width, height);
 }
 
-void KinectDevice::draw() {
+void KinectDevice::draw(string _name) {
     ofSetColor(255);
     if(texture.isAllocated())
         texture.draw(aspectPosition.x, aspectPosition.y, aspectSize.x, aspectSize.y);
     
-    ofDrawBitmapStringHighlight(fullName, aspectPosition.x + 20, aspectPosition.y + 20);
+    ofDrawBitmapStringHighlight(_name, aspectPosition.x + 20, aspectPosition.y + 20);
     if (isRunning()) {
         ofSetColor(0, 255, 0, 255);
     } else {

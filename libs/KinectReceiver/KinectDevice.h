@@ -53,7 +53,7 @@ public:
     
     ofTexture &getTexture();
     ofVec3f &getCom();
-    void draw();
+    void draw(string _name);
     void drawSelected();
     
     float convertToRealWorldX(float x, float depth);
