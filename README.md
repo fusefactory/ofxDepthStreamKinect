@@ -44,6 +44,14 @@ Every new frame a message is send.
 
 Using [ofxAzureKinect](https://github.com/fusefactory/ofxAzureKinect/tree/develop) retrive depth data of [AzureKinect](https://docs.microsoft.com/en-us/azure/kinect-dk/) and it starts a server stream.
 
+### Jetson Nano
+
+This addons works with [Jetson Nano](https://www.nvidia.com/it-it/autonomous-machines/embedded-systems/jetson-nano/). 
+
+- Install *libk4a1.3, libk4a1.3-dev, k4a-tools* (version could be change) as described in [Microsoft Documentation](https://docs.microsoft.com/it-it/azure/kinect-dk/sensor-sdk-download)
+- Use the [jetson-nano breanch](https://github.com/fusefactory/ofxAzureKinect/tree/jetson-nano) of ofxAzureKinect
+- In config.make add **PROJECT_LDFLAGS=-lk4a**.
+
 
 ## kinectReceiver
 
