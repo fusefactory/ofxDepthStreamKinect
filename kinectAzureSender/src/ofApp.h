@@ -33,11 +33,17 @@ private:
 	ofxAzureKinect::Device kinectDevice;
 	KinectTransmitterDepthMap kinectTransmitter;
 
-	ofShortPixels depthPixels;		//depth image from kinect device
+	ofShortPixels depthPixels;			//depth image from kinect device
 	ofShortPixels rawDepthPixels;		//image returned from addons
 	ofShortPixels depthToDrawPixels;
-	ofTexture depthTexture;			//texture to draw depth image
-		
+	ofTexture depthTexture;				//texture to draw depth image
+
+	//recording
+	ofPixels depth1BytePixels;
+	ofImage imageToSave;
+	string recordFolder;
+	int recordCount = 0;
+
 	//gui
 	ofxPanel gui;
 	ofxIntSlider tcpPortSlider;
@@ -47,6 +53,7 @@ private:
 	ofxFloatSlider  topMarginFloatSlider;
 	ofxFloatSlider  bottomMarginFloatSlider;
 	ofxToggle singleClient;
+	ofxToggle recordToggle;
 
 	bool newDepthData = false;
 };
