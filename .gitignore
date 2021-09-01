@@ -61,3 +61,8 @@ Android.mk
 
 #Windows
 */bin/*.exe
+*.obj
+obj/
+*.tlog
+bin/data/screenshots/
+CppProperties.json
