@@ -66,3 +66,6 @@ obj/
 *.tlog
 bin/data/screenshots/
 CppProperties.json
+
+#ofxDepthStream
+kinectAzureSender/bin/data/record*
