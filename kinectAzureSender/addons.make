@@ -2,3 +2,5 @@ ofxAzureKinect
 ofxDepthStreamKinect
 ofxGui
 ofxNetwork
+ofxPoco
+ofxVideoRecorder

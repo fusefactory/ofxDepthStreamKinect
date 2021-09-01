@@ -5,6 +5,7 @@
 #include "ofxAzureKinect.h"
 #include "KinectTransmitterDepthMap.h"
 #include "ofxGui.h"
+#include "ofxVideoRecorder.h"
 
 class ofApp : public ofBaseApp{
 
@@ -43,6 +44,9 @@ private:
 	ofImage imageToSave;
 	string recordFolder;
 	int recordCount = 0;
+	ofxVideoRecorder vidRecorder;
+	bool bRecording = false;
+
 
 	//gui
 	ofxPanel gui;

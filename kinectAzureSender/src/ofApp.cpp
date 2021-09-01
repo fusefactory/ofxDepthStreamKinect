@@ -8,6 +8,8 @@ void ofApp::setup(){
 	ofSetWindowTitle("kinectAzureStreaming");
 
 	recordFolder = ofToDataPath("/record-" + ofGetTimestampString("%C_%m_%d-%H_%M_%S") + "/");
+	vidRecorder.setVideoCodec("mpeg4");
+	vidRecorder.setVideoBitrate("800k");
 
 	//setup gui
 	gui.setup("kinect", "config.xml"); // most of the time you don't need a name
@@ -72,10 +74,36 @@ void ofApp::setup(){
 void ofApp::exit(){
 	kinectTransmitter.stop();
 	this->kinectDevice.close();
+
+	if(vidRecorder.isInitialized() && bRecording) vidRecorder.close();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if (recordToggle != bRecording) {
+		bRecording = recordToggle;
+
+		if (!vidRecorder.isInitialized()) {
+			vidRecorder.setup("output", rawDepthPixels.getWidth(), rawDepthPixels.getHeight(), 30);
+			vidRecorder.start();
+		}
+		else if(!bRecording && vidRecorder.isInitialized()) {
+            vidRecorder.close();
+        }
+	}
+
+
+	if (bRecording && !vidRecorder.isInitialized()) {
+		//          vidRecorder.setup(fileName+ofGetTimestampString()+fileExt, vidGrabber.getWidth(), vidGrabber.getHeight(), 30); // no audio
+		//            vidRecorder.setup(fileName+ofGetTimestampString()+fileExt, 0,0,0, sampleRate, channels); // no video
+		//          vidRecorder.setupCustomOutput(vidGrabber.getWidth(), vidGrabber.getHeight(), 30, sampleRate, channels, "-vcodec mpeg4 -b 1600k -acodec mp2 -ab 128k -f mpegts udp://localhost:1234"); // for custom ffmpeg output string (streaming, etc)
+
+					// Start recording
+		vidRecorder.start();
+	}
+
+
+
 	/*
 	- apply crop
 	- modify image to draw
@@ -128,9 +156,14 @@ void ofApp::update(){
 		depthTexture.loadData(depthToDrawPixels);
 
 		if (recordToggle) {
-			imageToSave.setFromPixels(depth1BytePixels);
-			imageToSave.save(recordFolder + ofToString(recordCount, 6, '0') + ".png");
-			recordCount++;
+			//imageToSave.setFromPixels(depth1BytePixels);
+			//imageToSave.save(recordFolder + ofToString(recordCount, 6, '0') + ".png");
+			//recordCount++;
+
+			bool success = vidRecorder.addFrame(depth1BytePixels);
+			if (!success) {
+				ofLogWarning("This frame was not added!");
+			}
 		}
 	}
 
