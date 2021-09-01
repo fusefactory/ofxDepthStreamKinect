@@ -7,8 +7,6 @@ void ofApp::setup(){
 
 	ofSetWindowTitle("kinectAzureStreaming");
 
-	recordFolder = ofToDataPath("/record-" + ofGetTimestampString("%C_%m_%d-%H_%M_%S") + "/");
-
 	//setup gui
 	gui.setup("kinect", "config.xml"); // most of the time you don't need a name
 	gui.setSize(300, gui.getHeight());
@@ -76,6 +74,13 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if(recordFolder.length() < 2 && recordToggle){
+		recordFolder = ofToDataPath("/record-" + ofGetTimestampString("%C_%m_%d-%H_%M_%S") + "/");
+	}
+	if (recordFolder.length() > 2 && !recordToggle) {
+		recordFolder = "";
+	}
+
 	/*
 	- apply crop
 	- modify image to draw
@@ -127,7 +132,7 @@ void ofApp::update(){
 
 		depthTexture.loadData(depthToDrawPixels);
 
-		if (recordToggle) {
+		if (recordToggle && recordFolder.length() > 2) {
 			imageToSave.setFromPixels(depth1BytePixels);
 			imageToSave.save(recordFolder + ofToString(recordCount, 6, '0') + ".png");
 			recordCount++;
