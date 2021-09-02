@@ -5,7 +5,7 @@ void ofApp::setup(){
 	ofSetFrameRate(60);
 	//ofSetLogLevel(OF_LOG_VERBOSE);
 
-	ofSetWindowTitle("kinectAzureStreaming - 0.2.0-record");
+	ofSetWindowTitle("kinectAzureStreaming - 0.2.0");
 
 	//setup gui
 	gui.setup("kinect", "config.xml"); // most of the time you don't need a name
