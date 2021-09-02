@@ -5,7 +5,7 @@ void ofApp::setup(){
 	ofSetFrameRate(60);
 	//ofSetLogLevel(OF_LOG_VERBOSE);
 
-	ofSetWindowTitle("kinectAzureStreaming");
+	ofSetWindowTitle("kinectAzureStreaming - 0.2.0-record");
 
 	//setup gui
 	gui.setup("kinect", "config.xml"); // most of the time you don't need a name
@@ -17,6 +17,7 @@ void ofApp::setup(){
 	gui.add(rightMarginFloatSlider.setup("RIGHT MARGIN", 0, 0, 0.5));
 	gui.add(topMarginFloatSlider.setup("TOP MARGIN", 0, 0, 0.5));
 	gui.add(bottomMarginFloatSlider.setup("BOTTOM MARGIN", 0, 0, 0.5));
+	gui.add(recordToggle.setup("RECORD", false));
 	gui.loadFromFile("config.xml");
 
 	//retrive kinect configuration
@@ -73,6 +74,13 @@ void ofApp::exit(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+	if(recordFolder.length() < 2 && recordToggle){
+		recordFolder = ofToDataPath("/record-" + ofGetTimestampString("%C_%m_%d-%H_%M_%S") + "/");
+	}
+	if (recordFolder.length() > 2 && !recordToggle) {
+		recordFolder = "";
+	}
+
 	/*
 	- apply crop
 	- modify image to draw
@@ -89,6 +97,10 @@ void ofApp::update(){
 		const float w = rawDepthPixels.getWidth();
 		const float h = rawDepthPixels.getHeight();
 
+		if (!depth1BytePixels.isAllocated()) {
+			depth1BytePixels.allocate(rawDepthPixels.getWidth(), rawDepthPixels.getHeight(), OF_IMAGE_GRAYSCALE);
+		}
+
 		for (int y = 0; y < rawDepthPixels.getHeight(); y++) {
 			for (int x = 0; x < rawDepthPixels.getWidth(); x++) {
 				int index = rawDepthPixels.getPixelIndex(x, y);
@@ -100,6 +112,14 @@ void ofApp::update(){
 					y > topMarginFloatSlider * h && y < h - bottomMarginFloatSlider * h) {
 					depthToDrawPixels[indexMirrored] = rawDepthPixels[index] * 9.0f;
 					depthPixels[indexMirrored] = rawDepthPixels[index];
+
+					//if i'm recording
+					if (recordToggle) {
+						const float value = depthPixels[indexMirrored];
+						const int div = 39;		//ipotizzo che il numero massimo in mm sia 10000 e lo divido per 256
+						const int r = (int)(value / div) & 255;
+						depth1BytePixels[indexMirrored] = 255 - (r & 0xff);
+					}
 				}
 				else {
 					depthPixels[indexMirrored] = 0;
@@ -111,6 +131,12 @@ void ofApp::update(){
 		kinectTransmitter.newData(depthPixels);
 
 		depthTexture.loadData(depthToDrawPixels);
+
+		if (recordToggle && recordFolder.length() > 2) {
+			imageToSave.setFromPixels(depth1BytePixels);
+			imageToSave.save(recordFolder + ofToString(recordCount, 6, '0') + ".png");
+			recordCount++;
+		}
 	}
 
 	//hardcore method to fix tcpPortSlider
