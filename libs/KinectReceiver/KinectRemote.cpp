@@ -9,6 +9,7 @@
 #include "KinectRemote.h"
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include "ofUtils.h"
 
 KinectRemote::KinectRemote(std::string name, std::string address, int port, unsigned int bytesPerPixel,  KinectDepthEnum kinectDepthEnum) : KinectDevice(name, bytesPerPixel, kinectDepthEnum) {
     edgeData = new float[int(resolution.x * resolution.y * 3)]; // rgb
@@ -33,7 +34,13 @@ bool KinectRemote::isRunning() {
     return receiver->isRunning();
 }
 
+uint64_t KinectRemote::getLastDataTimeMillis() {
+    return lastDataTimeMillis;
+}
+
 void KinectRemote::newDepthData(char *data) {
+    lastDataTimeMillis = ofGetElapsedTimeMillis();
+
     float comX = 0;
     float comY = 0;
     float comZ = 0;

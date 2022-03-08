@@ -25,12 +25,14 @@ public:
     void start() override;
     void stop() override;
     bool isRunning() override;
+    uint64_t getLastDataTimeMillis();
 
 protected:
     float *updateEdgeData() override;
     ofVec3f &updateCom() override;
     int xKeystone(const float pX, const float pY, float keystone);
     void clearEdgeData() override;
+    uint64_t lastDataTimeMillis = 0;
 
 private:
 	KinectReceiver* receiver;
