@@ -37,6 +37,14 @@ The steps to get the single message are:
 
 Every new frame a message is send.
 
+# Preprocessor Macro 
+Add **ofxDepthStreamKinectReceiver** to the preprocessor to enable opencv dependancies. 
+
+```c++
+#define ofxDepthStreamKinectReceiver
+```
+
+Visual Studio > Properties > Configuration Properties > C/C++ > Preprocessor > Preprocessor Definitions
 
 # Examples
 
@@ -54,11 +62,5 @@ This addons works with [Jetson Nano](https://www.nvidia.com/it-it/autonomous-mac
 
 
 ## kinectReceiver
-
-Add ofxDepthStreamKinectReceiver to the preprocessor to enable opencv dependancies.
-
-```c++
-#define ofxDepthStreamKinectReceiver
-```
 
 Generic stream receiver for kinect (Kinect V2 and KinectAzure) depth map data.
