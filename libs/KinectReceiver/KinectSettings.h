@@ -58,7 +58,7 @@ static KinectSettings getDefaultKinectSettings(){
     kinectSettings.leftMargin.set(0, 0, 0.5);
     kinectSettings.rightMargin.set(0, 0, 0.5);
     kinectSettings.topMargin.set(0,0 ,0.5);
-    kinectSettings.bottomMargin.set(0, 0, 0.5);
+    kinectSettings.bottomMargin.set(0, 0, 0.9);
     kinectSettings.keystone.set(0.3, -1.0, 1.0);
     kinectSettings.vertCorrection.set(1.0, -2.0, 2.0);
 

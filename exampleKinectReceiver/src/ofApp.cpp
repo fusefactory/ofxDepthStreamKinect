@@ -5,8 +5,9 @@ void ofApp::setup(){
     ofSetFrameRate(60);
     
     KinectConfig kinectConfig;
-    kinectConfig.serverAddress = "127.0.0.1";
-    kinectConfig.port = 4444;
+    //kinectConfig.serverAddress = "127.0.0.1";
+    kinectConfig.serverAddress = "192.168.1.78";
+    kinectConfig.port = 4445;
     kinectConfig.minDistance = 500;
     kinectConfig.maxDistance = 5000;
     kinectConfig.leftMargin = 0;
@@ -16,7 +17,7 @@ void ofApp::setup(){
     kinectConfig.vertCorrection = 1;
     kinectConfig.keystone = 0;
 
-    kinect = new KinectRemote("kinect", kinectConfig.serverAddress, kinectConfig.port, 2, KinectAzureDepthNFOVUnbinned);
+    kinect = new KinectRemote("kinect", kinectConfig.serverAddress, kinectConfig.port, 2, KinectAzureDepthWFOVBinned);
     kinect->setMinDistance(kinectConfig.minDistance);
     kinect->setMaxDistance(kinectConfig.maxDistance);
     kinect->setLeftMargin(kinectConfig.leftMargin);

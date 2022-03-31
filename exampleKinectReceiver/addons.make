@@ -1,4 +1,4 @@
-ofxDepthStreamKinect
 ofxGui
 ofxNetwork
 ofxOpenCv
+ofxDepthStreamKinect
