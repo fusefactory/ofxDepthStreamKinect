@@ -18,6 +18,11 @@ KinectObjectTracker::KinectObjectTracker(KinectDevice *kinect) {
     
     fbo.allocate(kinect->getResolution().x, kinect->getResolution().y, GL_RGBA);
     fbo.getTexture().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+	
+	alpha_mask.allocate(kinect->getResolution().x, kinect->getResolution().y, GL_RGBA);
+	alpha_mask.getTexture().setTextureMinMagFilter(GL_NEAREST, GL_NEAREST);
+
+	alpha_image.allocate(kinect->getResolution().x, kinect->getResolution().y);
 }
 
 void KinectObjectTracker::setMinArea(int &area) {
@@ -50,6 +55,30 @@ void KinectObjectTracker::update(int maxBlobs) {
     grayImage = colorImage;
     
     contourFinder.findContours(grayImage, objectMinArea, objectMaxArea, maxBlobs, false);
+
+	alpha_mask.begin();
+	glClearColor(0, 0, 0, 0);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	ofPushStyle();
+	ofSetLineWidth(0);
+	ofBackground(0);
+	ofSetColor(255);
+	ofFill();
+	for (ofxCvBlob &blob : contourFinder.blobs) {
+		ofFill();
+		ofSetColor(255);
+		ofBeginShape();
+		for (int i = 0; i < blob.nPts; i++) {
+			ofVertex(blob.pts[i].x, blob.pts[i].y);
+		}
+		ofEndShape(true);
+	}
+	alpha_mask.end();
+	ofPopStyle();
+
+	colorImage.getTexture().setAlphaMask(alpha_mask.getTexture());
+	colorImage.getTexture().readToPixels(depthPixels);
 }
 
 vector<ofxCvBlob> KinectObjectTracker::getBlobs() {
@@ -74,12 +103,14 @@ void KinectObjectTracker::drawBlobs(float x, float y, float width, float height)
         ofDrawEllipse(blob.centroid.x, blob.centroid.y, 10 * factor, 10 * factor);
     }
     fbo.end();
-    ofPopStyle();
+	ofPopStyle();
     
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ofSetColor(255);
     fbo.draw(x, y, width, height);
+    alpha_mask.draw(x + width + 4, y + height, width, height);
+	colorImage.draw(x + width + 4, y, width, height);
     glDisable(GL_BLEND);
 }
 

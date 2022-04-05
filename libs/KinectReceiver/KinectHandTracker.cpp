@@ -25,17 +25,38 @@ void KinectHandTracker::calculateTrackedHands() {
     for (ofxCvBlob &blob : contourFinder.blobs) {
 //        int index = depthPixels.getPixelIndex(blob.centroid.x, blob.centroid.y);
 //        float depth = (255 - depthPixels[index]) / 255.0 * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
-        
+		
+		float min_depth = 100000;
+		float max_depth = 0;
+		float max_y = 0;
+		float max_y_depth = 0;
+		float curr_x = 0;
+		float curr_y = 0;
+		float curr_x_depth = 0;
+		float curr_y_depth = 0;
         // average blob/hand depth
         float handDepth = 0;
         int validPixels = 0;
         for (int x = 0; x < blob.boundingRect.width; x++) {
             for (int y = 0; y < blob.boundingRect.height; y++) {
                 int index = depthPixels.getPixelIndex(blob.boundingRect.x + x, blob.boundingRect.y + y);
-                float depth = (255 - depthPixels[index]) / 255.0 * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
+                float depth = (255.0 - depthPixels[index]) / 255.0 * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
                 if (depth > 0) {
                     handDepth += depth;
                     validPixels++;
+
+					if (depth < min_depth) {
+						min_depth = depth;
+						curr_x_depth = blob.boundingRect.x + x;
+						curr_y_depth = blob.boundingRect.y + y;
+					}
+
+					if (y >= max_y) {
+						max_y_depth = depth;
+						max_y = y;
+						curr_x = blob.boundingRect.x + x;
+						curr_y = blob.boundingRect.y + y;
+					}
                 }
             }
         }
@@ -44,13 +65,40 @@ void KinectHandTracker::calculateTrackedHands() {
         }
 
         float handX = kinect->convertToRealWorldX(blob.centroid.x, handDepth);
-//        float handY = kinect->convertToRealWorldY(blob.centroid.y, depth); // not necessary here
+		float handZ = kinect->convertToRealWorldY(blob.centroid.y, handDepth); // not necessary here
+
+		float topX = kinect->convertToRealWorldX(curr_x_depth, min_depth);
+		float topZ = kinect->convertToRealWorldY(curr_y_depth, min_depth);
+
+		float frontX = kinect->convertToRealWorldX(curr_x, max_y_depth);
+		float frontZ = kinect->convertToRealWorldY(curr_y, max_y_depth);
         
         TrackedHand hand;
+		//---center
         hand.center.x = handX;
         hand.center.y = handDepth; // bottom kinect
         hand.width = blob.boundingRect.width;
         hand.height = blob.boundingRect.height;
+		hand.center_z = handZ;
+
+		//---top
+		hand.top.x = topX;
+		hand.top.y = min_depth;
+		hand.top_z = topZ;
+		
+		hand.top_on_texture.x = curr_x_depth;
+		hand.top_on_texture.y = curr_y_depth;
+
+		//---front
+		hand.front.x = frontX;
+		hand.front.y = max_y_depth;
+		hand.front_z = frontZ;
+
+		hand.front_on_texture.x = curr_x;
+		hand.front_on_texture.y = curr_y;
+
+		hand.range_start = kinect->convertToRealWorldY(blob.boundingRect.y, handDepth);
+		hand.range_end = kinect->convertToRealWorldY(blob.boundingRect.y + blob.boundingRect.height, handDepth);
         
         hands.push_back(hand);
     }
@@ -58,6 +106,23 @@ void KinectHandTracker::calculateTrackedHands() {
 
 std::vector<TrackedHand> KinectHandTracker::getTrackedHands() {
     return hands;
+}
+
+ofVec4f KinectHandTracker::getPointsInfo(int cx, int cy) {
+	//ofVec3f out = ofVec3f(0, 0, 0);
+	ofVec4f out = ofVec4f(0, 0, 0, 0);
+	int index = depthPixels.getPixelIndex(cx, cy);
+	float depth = (255.0 - depthPixels[index]) / 255.0 * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
+	float depth_abs = (255.0 - depthPixels[index]) / 255.0;
+	float cursorX = kinect->convertToRealWorldX(cx, depth);
+	float cursorY = kinect->convertToRealWorldY(cy, depth);
+
+	out.x = cursorX;
+	out.y = depth;
+	out.z = cursorY;
+	out.w = depth_abs;
+
+	return out;
 }
 
 #endif

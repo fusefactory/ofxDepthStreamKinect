@@ -39,15 +39,17 @@ protected:
     KinectDevice *kinect;
     ofPixels depthPixels;
     ofxCvContourFinder contourFinder;
+    ofFbo fbo;
+	ofFbo alpha_mask;
     
 private:
     int objectMinArea = 10, objectMaxArea = 10000;
     
     ofxCvColorImage colorImage;
     ofxCvGrayscaleImage grayImage;
+    ofxCvGrayscaleImage alpha_image;
     
     bool showBlobs = true;
-    ofFbo fbo;
     
     std::vector<ofVec3f> objectsTracked;
 };

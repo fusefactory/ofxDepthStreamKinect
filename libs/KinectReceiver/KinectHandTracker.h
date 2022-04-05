@@ -21,7 +21,8 @@ public:
     KinectHandTracker(KinectDevice *kinect);
     std::vector<TrackedHand> getTrackedHands();
     void update(int maxBlobs) override;
-    
+	ofVec4f getPointsInfo(int cx, int cy);
+
 private:
     std::vector<TrackedHand> hands;
     void calculateTrackedHands();

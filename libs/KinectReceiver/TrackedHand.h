@@ -12,10 +12,22 @@
 class TrackedHand {
     
 public:
+	//center: {x_pos, depth} | z: distance from screen
+
     ofVec2f center;
-    float width;
-    float height;
-    
+    ofVec2f top;
+    ofVec2f front;
+	float center_z;
+	float top_z;
+	float front_z;
+
+	ofVec2f top_on_texture;
+	ofVec2f front_on_texture;
+
+	float width;
+	float height;
+	float range_start;
+	float range_end;
 };
 
 #endif /* TrackedHand_h */
