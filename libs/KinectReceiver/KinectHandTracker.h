@@ -22,10 +22,12 @@ public:
     std::vector<TrackedHand> getTrackedHands();
     void update(int maxBlobs) override;
 	ofVec4f getPointsInfo(int cx, int cy);
+	void setNoiseTh(float threshold);
 
 private:
     std::vector<TrackedHand> hands;
     void calculateTrackedHands();
+	float noise_th;
 };
 #endif /* KinectHandTracker_h */
 

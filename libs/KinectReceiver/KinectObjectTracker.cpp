@@ -52,8 +52,10 @@ bool KinectObjectTracker::showingBlobs() {
 void KinectObjectTracker::update(int maxBlobs) {
     kinect->getTexture().readToPixels(depthPixels);
     colorImage.setFromPixels(depthPixels);
+	//colorImage.erode();
     grayImage = colorImage;
     
+	//grayImage.blurGaussian();
     contourFinder.findContours(grayImage, objectMinArea, objectMaxArea, maxBlobs, false);
 
 	alpha_mask.begin();
@@ -77,7 +79,13 @@ void KinectObjectTracker::update(int maxBlobs) {
 	alpha_mask.end();
 	ofPopStyle();
 
+	//colorImage.blurGaussian();
 	colorImage.getTexture().setAlphaMask(alpha_mask.getTexture());
+	//colorImage.erode();
+	//colorImage.blurGaussian();
+	colorImage.dilate();
+	//colorImage.dilate();
+	//colorImage.blurGaussian();
 	colorImage.getTexture().readToPixels(depthPixels);
 }
 

@@ -24,6 +24,9 @@ public:
 	ofVec2f top_on_texture;
 	ofVec2f front_on_texture;
 
+	ofVec2f blend;
+	float blend_z;
+
 	float width;
 	float height;
 	float range_start;
