@@ -116,10 +116,16 @@ void KinectObjectTracker::drawBlobs(float x, float y, float width, float height)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ofSetColor(255);
-    fbo.draw(x, y, width, height);
-    alpha_mask.draw(x + width + 4, y + height, width, height);
-	colorImage.draw(x + width + 4, y, width, height);
+    //fbo.draw(x, y, width, height);
+	//colorImage.draw(x, y + height + 4, width, height);
+    alpha_mask.draw(x, y + height + 4, width, height);
+	colorImage.draw(x, y, width, height);
     glDisable(GL_BLEND);
 }
+
+
+//ofTexture KinectObjectTracker::getTexture() {
+//	return colorImage.getTexture();
+//}
 
 #endif

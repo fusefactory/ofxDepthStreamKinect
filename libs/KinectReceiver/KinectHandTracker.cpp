@@ -23,6 +23,10 @@ void KinectHandTracker::setNoiseTh(float threshold) {
 	noise_th = threshold;
 }
 
+void KinectHandTracker::setPtsRatio(float ratio) {
+	front_pts_ratio = ratio;
+}
+
 void KinectHandTracker::calculateTrackedHands() {
     hands.clear();
     
@@ -71,7 +75,23 @@ void KinectHandTracker::calculateTrackedHands() {
 		float handDepth_map = handDepth;
 		handDepth = handDepth * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
 		//min_depth = min_depth * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
+		int max_front_pts = glm::floor(validPixels * front_pts_ratio);
+		vector<pair<float, int> > pts_vec;
 
+		//for (int i = 0; i < 10; i++) {
+		//	// filling the original array
+		//	cin >> k;
+		//	a.push_back(make_pair(k, i)); // k = value, i = original index
+		//}
+
+		//sort(a.begin(), a.end());
+
+		//for (i = 0; i < n; i++) {
+		//	cout << a[i].first << " " << a[i].second << "\n";
+		//}
+
+
+		int pts_iter = 0;
 		for (int x = 0; x < blob.boundingRect.width; x++) {
 			for (int y = 0; y < blob.boundingRect.height; y++) {
 				int index = depthPixels.getPixelIndex(blob.boundingRect.x + x, blob.boundingRect.y + y);
@@ -85,15 +105,47 @@ void KinectHandTracker::calculateTrackedHands() {
 					}
 
 					float real_y = kinect->convertToRealWorldY(blob.boundingRect.y + y, depth);
-					if (real_y < max_y) {
-						max_y_depth = depth;
-						max_y = real_y;
-						curr_x = blob.boundingRect.x + x;
-						curr_y = blob.boundingRect.y + y;
-					}
+					pts_vec.push_back(make_pair(real_y, pts_iter));
+					//if (real_y < max_y) {
+					//	max_y_depth = depth;
+					//	max_y = real_y;
+					//	curr_x = blob.boundingRect.x + x;
+					//	curr_y = blob.boundingRect.y + y;
+					//}
 				}
+
+				pts_iter++;
 			}
 		}
+
+		sort(pts_vec.begin(), pts_vec.end());
+		max_y = 0;
+		for (int i = 0; i < min(max_front_pts, (int)pts_vec.size()); i++) {
+			int pt_x = pts_vec[i].second / (int)glm::floor(blob.boundingRect.height);
+			int pt_y = pts_vec[i].second % (int)glm::floor(blob.boundingRect.height);
+
+			int index = depthPixels.getPixelIndex(blob.boundingRect.x + pt_x, blob.boundingRect.y + pt_y);
+			float depth = (255.0 - depthPixels[index]) / 255.0;
+			depth = depth * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
+			if (depth < min_depth) {
+				min_depth = depth;
+				curr_x_depth = blob.boundingRect.x + pt_x;
+				curr_y_depth = blob.boundingRect.y + pt_y;
+			}
+
+			max_y += pts_vec[i].first;
+			max_y_depth += depth;
+			curr_x += blob.boundingRect.x + pt_x;
+			curr_y += blob.boundingRect.y + pt_y;
+		}
+
+		if (max_front_pts > 0) {
+			max_y /= max_front_pts;
+			max_y_depth /= max_front_pts;
+			curr_x /= max_front_pts;
+			curr_y /= max_front_pts;
+		}
+
 
         float handX = kinect->convertToRealWorldX(blob.centroid.x, handDepth);
 		float handZ = kinect->convertToRealWorldY(blob.centroid.y, handDepth); // not necessary here

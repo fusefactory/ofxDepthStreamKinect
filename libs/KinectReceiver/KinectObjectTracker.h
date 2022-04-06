@@ -34,6 +34,7 @@ public:
     bool showingBlobs();
     void drawBlobs(float x, float y, float width, float height);
     vector<ofxCvBlob> getBlobs();
+	ofTexture getTexture();
 
 protected:
     KinectDevice *kinect;

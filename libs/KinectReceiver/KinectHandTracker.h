@@ -23,11 +23,13 @@ public:
     void update(int maxBlobs) override;
 	ofVec4f getPointsInfo(int cx, int cy);
 	void setNoiseTh(float threshold);
+	void setPtsRatio(float ratio);
 
 private:
     std::vector<TrackedHand> hands;
     void calculateTrackedHands();
 	float noise_th;
+	float front_pts_ratio;
 };
 #endif /* KinectHandTracker_h */
 
