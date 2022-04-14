@@ -53,7 +53,7 @@ bool KinectObjectTracker::showingBlobs() {
 
 void KinectObjectTracker::update(int maxBlobs) {
     kinect->getTexture().readToPixels(depthPixels);
-    colorImage.setFromPixels(depthPixels);
+    //colorImage.setFromPixels(depthPixels);
 
 	boundingBox_image.clear();
 	boundingBox_image.set(0);
@@ -61,15 +61,51 @@ void KinectObjectTracker::update(int maxBlobs) {
 	for (int x = 0; x < kinect->getResolution().x; x++) {
 		for (int y = 0; y < kinect->getResolution().y; y++) {
 			int index = boundingPixels.getPixelIndex(x, y);
-			//boundingPixels[index];
 
 			float min_realX = kinect->convertToMapWorldX(x, y, kinect->getMinDistance());
 			float min_realY = kinect->convertToMapWorldY(x, y, kinect->getMinDistance());
 
+			float mid_realX = kinect->convertToMapWorldX(x, y, ofMap(0.25, 0.0, 1.0, kinect->getMinDistance(), kinect->getMaxDistance()));
+			float mid_realY = kinect->convertToMapWorldY(x, y, ofMap(0.25, 0.0, 1.0, kinect->getMinDistance(), kinect->getMaxDistance()));
+			float mid2_realX = kinect->convertToMapWorldX(x, y, ofMap(0.75, 0.0, 1.0, kinect->getMinDistance(), kinect->getMaxDistance()));
+			float mid2_realY = kinect->convertToMapWorldY(x, y, ofMap(0.75, 0.0, 1.0, kinect->getMinDistance(), kinect->getMaxDistance()));
+
+			float point_maxY = ofMap(0.25, 0.0, 1.0, Box_Yt2, Box_Yb2);
+			float point_minY = ofMap(0.25, 0.0, 1.0, Box_Yt1, Box_Yb1);
+			float point_maxX = ofMap(0.25, 0.0, 1.0, Box_Xt, Box_Xb);
+			float point2_maxY = ofMap(0.75, 0.0, 1.0, Box_Yt2, Box_Yb2);
+			float point2_minY = ofMap(0.75, 0.0, 1.0, Box_Yt1, Box_Yb1);
+			float point2_maxX = ofMap(0.75, 0.0, 1.0, Box_Xt, Box_Xb);
+
 			float max_realX = kinect->convertToMapWorldX(x, y, kinect->getMaxDistance());
 			float max_realY = kinect->convertToMapWorldY(x, y, kinect->getMaxDistance());
 
+
+			//int depthIndex = depthPixels.getPixelIndex(x, y);
+			//float depth = (255.0 - depthPixels[index]) / 255.0 * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
+			////float depth = (255.0 - depthPixels[index]) / 255.0;
+
+			//float point_realX = kinect->convertToMapWorldX(x, y, depth);
+			//float point_realY = kinect->convertToMapWorldY(x, y, depth);
+			//float point_maxY = ofMap(depth, kinect->getMinDistance(), kinect->getMaxDistance(), Box_Yt2, Box_Yb2);
+			//float point_minY = ofMap(depth, kinect->getMinDistance(), kinect->getMaxDistance(), Box_Yt1, Box_Yb1);
+			//float point_maxX = ofMap(depth, kinect->getMinDistance(), kinect->getMaxDistance(), Box_Xt, Box_Xb);
+
+			//if (abs(point_realX) <= point_maxX && point_realY >= point_minY && point_realY <= point_maxY) {
+			//	depth = 0;
+			//}
+			//else {
+			//	depthPixels.setColor(x, y, ofColor(0));
+			//}
+
+
 			if (abs(min_realX) <= Box_Xt && min_realY >= Box_Yt1 && min_realY <= Box_Yt2) {
+				boundingPixels.setColor(index, ofColor(255, 255));
+			}
+			else if (abs(mid_realX) <= point_maxX && mid_realY >= point_minY && mid_realY <= point_maxY) {
+				boundingPixels.setColor(index, ofColor(255, 255));
+			}
+			else if (abs(mid2_realX) <= point2_maxX && mid2_realY >= point2_minY && mid2_realY <= point2_maxY) {
 				boundingPixels.setColor(index, ofColor(255, 255));
 			}
 			else if (abs(max_realX) <= Box_Xb && max_realY >= Box_Yb1 && max_realY <= Box_Yb2) {
@@ -77,16 +113,15 @@ void KinectObjectTracker::update(int maxBlobs) {
 			}
 			else {
 				boundingPixels.setColor(index, ofColor(0,0));
+				depthPixels.setColor(x, y, ofColor(0));
 			}
 		}
 	}
 	boundingBox_image.setFromPixels(boundingPixels);
 	//colorImage.set(255);
-	colorImage.getTexture().setAlphaMask(boundingBox_image.getTexture());
+	//colorImage.getTexture().setAlphaMask(boundingBox_image.getTexture());
 
-	//test-> draw before alpha
-    
-
+	colorImage.setFromPixels(depthPixels);
 	//colorImage.erode();
 	grayImage = colorImage;
 	//grayImage.blurGaussian();
@@ -113,14 +148,31 @@ void KinectObjectTracker::update(int maxBlobs) {
 	alpha_mask.end();
 	ofPopStyle();
 
-	//colorImage.blurGaussian();
-	colorImage.getTexture().setAlphaMask(alpha_mask.getTexture());
-	//colorImage.erode();
-	//colorImage.blurGaussian();
+
+	alpha_mask.getTexture().readToPixels(alphaPixels);
+	for (int x = 0; x < kinect->getResolution().x; x++) {
+		for (int y = 0; y < kinect->getResolution().y; y++) {
+
+			if (alphaPixels.getColor(x, y) == ofColor(0)) {
+				depthPixels.setColor(x, y, ofColor(0));
+			}
+
+			int index = alphaPixels.getPixelIndex(x, y);
+		}
+	}
+	colorImage.setFromPixels(depthPixels);
 	colorImage.dilate();
-	//colorImage.dilate();
-	//colorImage.blurGaussian();
 	colorImage.getTexture().readToPixels(depthPixels);
+
+
+	////colorImage.blurGaussian();
+	//colorImage.getTexture().setAlphaMask(alpha_mask.getTexture());
+	////colorImage.erode();
+	////colorImage.blurGaussian();
+	//colorImage.dilate();
+	////colorImage.dilate();
+	////colorImage.blurGaussian();
+	//colorImage.getTexture().readToPixels(depthPixels);
 }
 
 vector<ofxCvBlob> KinectObjectTracker::getBlobs() {
@@ -156,7 +208,8 @@ void KinectObjectTracker::drawBlobs(float x, float y, float width, float height)
     alpha_mask.draw(x, y + height + 4, width, height);
 	boundingBox_image.draw(x, y + height + 4, width, height);
     glDisable(GL_BLEND);
-	boundingBox_image.draw(x + width + 4, y, width, height);
+	alpha_mask.draw(x + width + 4, y, width, height);
+	colorImage.draw(x + width + 4, y + height + 4, width, height);
 	//colorImage.draw(0,0, width, height);
 }
 

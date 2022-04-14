@@ -42,6 +42,7 @@ protected:
     KinectDevice *kinect;
     ofPixels depthPixels;
     ofPixels boundingPixels;
+    ofPixels alphaPixels;
     ofxCvContourFinder contourFinder;
     ofFbo fbo;
 	ofFbo alpha_mask;
