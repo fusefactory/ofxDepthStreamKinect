@@ -176,6 +176,9 @@
 		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\src\ofxDepthStreamKinect.h">
 			<Filter>addons\ofxDepthStreamKinect\src</Filter>
 		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\src\ofxDepthStreamKinectReceiver.h">
+			<Filter>addons\ofxDepthStreamKinect\src</Filter>
+		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxDepthStreamKinect\libs\KinectReceiver\KinectBasePanel.h">
 			<Filter>addons\ofxDepthStreamKinect\libs\KinectReceiver</Filter>
 		</ClInclude>
@@ -243,6 +246,9 @@
 			<Filter>addons\ofxGui\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h">
+			<Filter>addons\ofxGui\src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiUtils.h">
 			<Filter>addons\ofxGui\src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h">

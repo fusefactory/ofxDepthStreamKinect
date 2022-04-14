@@ -27,6 +27,8 @@ public:
     void setMinArea(int &area);
     void setMaxArea(int &area);
     void toggleBlobs(bool &value);
+
+	void setBoundingBox(float Yt1, float Yt2, float Xt, float Yb1, float Yb2, float Xb);
     
     int getMinArea();
     int getMaxArea();
@@ -39,9 +41,11 @@ public:
 protected:
     KinectDevice *kinect;
     ofPixels depthPixels;
+    ofPixels boundingPixels;
     ofxCvContourFinder contourFinder;
     ofFbo fbo;
 	ofFbo alpha_mask;
+	//ofFbo boundingBox_image;
     
 private:
     int objectMinArea = 10, objectMaxArea = 10000;
@@ -49,10 +53,18 @@ private:
     ofxCvColorImage colorImage;
     ofxCvGrayscaleImage grayImage;
     ofxCvGrayscaleImage alpha_image;
+    ofxCvGrayscaleImage boundingBox_image;
     
     bool showBlobs = true;
     
     std::vector<ofVec3f> objectsTracked;
+
+	float Box_Yt1;
+	float Box_Yt2;
+	float Box_Xt;
+	float Box_Yb1;
+	float Box_Yb2;
+	float Box_Xb;
 };
 
 #endif /* KinectObjectTracker_h */

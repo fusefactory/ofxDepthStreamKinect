@@ -22,6 +22,7 @@ public:
     std::vector<TrackedHand> getTrackedHands();
     void update(int maxBlobs) override;
 	ofVec4f getPointsInfo(int cx, int cy);
+	ofVec4f getPointsMapInfo(int cx, int cy);
 	void setNoiseTh(float threshold);
 	void setPtsRatio(float ratio);
 

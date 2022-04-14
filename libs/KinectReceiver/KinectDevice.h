@@ -55,9 +55,16 @@ public:
     ofVec3f &getCom();
     void draw();
     void drawSelected();
-    
+
+	vector<vector<vector<float>>> kinect_XYMap;
+	float y_remapping_factor;
+
     float convertToRealWorldX(float x, float depth);
     float convertToRealWorldY(float y, float depth);
+
+	float convertToMapWorldX(float x, float y, float depth);
+	float convertToMapWorldY(float x, float y, float depth);
+
     
     //recorder
     bool readKinectRecording = false;

@@ -209,4 +209,21 @@ ofVec4f KinectHandTracker::getPointsInfo(int cx, int cy) {
 	return out;
 }
 
+ofVec4f KinectHandTracker::getPointsMapInfo(int cx, int cy) {
+	//ofVec3f out = ofVec3f(0, 0, 0);
+	ofVec4f out = ofVec4f(0, 0, 0, 0);
+	int index = depthPixels.getPixelIndex(cx, cy);
+	float depth = (255.0 - depthPixels[index]) / 255.0 * (kinect->getMaxDistance() - kinect->getMinDistance()) + kinect->getMinDistance();
+	float depth_abs = (255.0 - depthPixels[index]) / 255.0;
+	float cursorX = kinect->convertToMapWorldX(cx, cy, depth);
+	float cursorY = kinect->convertToMapWorldY(cx, cy, depth);
+
+	out.x = cursorX;
+	out.y = depth;
+	out.z = cursorY;
+	out.w = depth_abs;
+
+	return out;
+}
+
 #endif

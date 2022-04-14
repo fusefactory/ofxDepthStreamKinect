@@ -292,6 +292,37 @@ float KinectDevice::convertToRealWorldX(float x, float depth) {
     return (x / resolution.x - 0.5f) * depth * XtoZ;
 }
 
+
 float KinectDevice::convertToRealWorldY(float y, float depth) {
     return (0.5f - y / resolution.y) * depth * YtoZ;
 }
+
+
+float KinectDevice::convertToMapWorldX(float x, float y, float depth) {
+	return depth * kinect_XYMap[y][x][0];
+}
+
+float KinectDevice::convertToMapWorldY(float x, float y, float depth) {
+	return depth * -kinect_XYMap[y][x][1] * (1 + y_remapping_factor * ofMap(depth, minDistance, maxDistance, 1, 0));
+}
+
+
+//wy = (double)(cx - DEPTH_Y_RES / 2) * 2 * ref_pix_size * wz / ref_distance
+
+//XtoZ = (float)tan(fieldOfViewRad.x / 2) * 2;
+
+
+///// camera -> world coordinate helper function
+//void freenect_camera_to_world(freenect_device* dev, int cx, int cy, int wz, double* wx, double* wy)
+//{
+//	double ref_pix_size = dev->registration.zero_plane_info.reference_pixel_size;
+//	double ref_distance = dev->registration.zero_plane_info.reference_distance;
+//	// We multiply cx and cy by these factors because they come from a 640x480 image,
+//	// but the zero plane pixel size is for a 1280x1024 image.
+//	// However, the 640x480 image is produced by cropping the 1280x1024 image
+//	// to 1280x960 and then scaling by .5, so aspect ratio is maintained, and
+//	// we should simply multiply by two in each dimension.
+//	double factor = 2 * ref_pix_size * wz / ref_distance;
+//	*wx = (double)(cx - DEPTH_X_RES / 2) * factor;
+//	*wy = (double)(cy - DEPTH_Y_RES / 2) * factor;
+//}
